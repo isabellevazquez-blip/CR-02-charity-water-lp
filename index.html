@@ -1,47 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>charity: water</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0; /* Remove any default padding */
+      font-family: 'Proxima Nova', 'Avenir', Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background-color: #ffffff;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-bottom: 8px solid #ffd60a; /* yellow strip under nav */
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .jerry-can-img {
+      width: 40px;
+      height: auto;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    nav h1 {
+      font-size: 1.3rem;
+      color: #003366;
+      margin: 0;
+      font-weight: normal;
+      text-transform: lowercase;
+      margin-left: -6px;
+    }
+
+    .nav-center {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      font-size: 1rem;
+      color: #003366;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav ul li::after {
+      content: ">";
+      margin-left: 6px;
+      font-size: 0.9rem;
+      color: #003366;
+    }
+
+    nav ul li.why-water::after {
+      content: "";
+    }
+
+    .sign-in {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: #003366;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .sign-in::before {
+      content: "👤";
+      margin-right: 6px;
+      display: inline-block;
+      color: #003366;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: url('charity water.jpg') no-repeat center top;
+      background-size: cover;
+      background-position: center -150px;
+      min-height: 80vh; /* Increase height for small screens */
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+      color: #fff;
+      padding: 0; /* No padding around the hero image */
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 100%;
+      width: 100%;
+      z-index: 1;
+      margin-left: 20px;   /* Less left margin for small screens */
+      margin-top: 10vh;    /* Less top margin for small screens */
+    }
+
+    .hero-content h2 {
+      font-size: 2rem;
+      color: #ffd60a;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    /* Call to Action Button */
+    .cta-btn {
+      position: relative;
+      display: block;
+      font-family: 'Proxima Nova', 'Avenir', Arial, sans-serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      margin-top: 10px;
+      max-width: fit-content;
+    }
+
+    .cta-btn span {
+      position: relative;
+      z-index: 2;
+      color: #ffd60a;
+    }
+
+    .cta-btn::before,
+    .cta-btn::after {
+      content: "";
+      position: absolute;
+      border-radius: 30px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .cta-btn::before {
+      background-color: #ffd60a;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      z-index: 0;
+    }
+
+    .cta-btn::after {
+      background-color: #77A8BB;
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+      z-index: 1;
+    }
+
+    /* Yellow background for divider image transition */
+    /* This fills the area between the hero and drip.png with yellow */
+    .yellow-divider-bg {
+      background-color: #ffd60a; /* bright yellow */
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      /* Add a little padding above and below the image for a smooth look */
+      padding-top: 0;
+      padding-bottom: 0;
+      text-align: center; /* center the image */
+    }
+
+    .divider-img {
+      width: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      /* No extra space around the image */
+    }
+
+    /* Yellow Strip (main content) */
+    .yellow-strip {
+      background-color: #ffd60a;
+      width: 100%;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .yellow-strip h3 {
+      font-size: 1.8rem;
+      color: #003366;
+      margin-bottom: 30px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 80%;
+      margin: 0 auto 15px auto;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .progress-container {
+      background: #fff;
+      border-radius: 30px;
+      overflow: hidden;
+      width: 80%;
+      margin: 0 auto 20px auto;
+      height: 30px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #003366, #0055aa);
+      width: 5.4%;
+      transition: width 1s ease-in-out;
+    }
+
+    .donate-btn {
+      background: #003366;
+      color: #ffd60a;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    @media (min-width: 600px) {
+      nav {
+        padding: 0.8rem 4rem;
+      }
+      .jerry-can-img {
+        width: 50px;
+        margin-right: 2px;
+      }
+      nav h1 {
+        font-size: 1.7rem;
+        margin-left: -10px;
+      }
+      nav ul {
+        gap: 3rem;
+      }
+      .hero {
+        min-height: 100vh;
+        padding: 0; /* No padding for large screens */
+        background-position: center -150px;
+      }
+      .hero-content {
+        max-width: 600px;
+        margin-left: 100px; /* More left margin for large screens */
+        margin-top: 25vh;   /* More top margin for large screens */
+      }
+      .hero-content h2 {
+        font-size: 3.2rem;
+      }
+      .hero-content p {
+        margin-bottom: 4.2rem;
+      }
+      .cta-btn {
+        font-size: 1.2rem;
+        padding: 15px 40px;
+        margin-top: 20px;
+      }
+      .yellow-strip h3 {
+        font-size: 2rem;
+      }
+      .progress-container, .progress-info {
+        width: 60%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo-container">
+      <img src="jerrycan.png" alt="Yellow Jerry Can Logo" class="jerry-can-img">
+      <h1>charity: water</h1>
+    </div>
+    <div class="nav-center">
+      <ul>
+        <li>😊 Take Action</li>
+        <li>❤️ About Us</li>
+        <li class="why-water">💧 Why Water?</li>
+      </ul>
+    </div>
+    <div class="sign-in">Sign In</div>
+  </nav>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2>Clean Water.<br> Measurable Results.<br> Global Impact.</h2>
+      <p>Every dollar given funds clean water projects,
+100% transparently tracked, reported,
+and proven to create lasting global change.</p>
+      <button class="cta-btn"><span>Let Me Help!</span></button>
+    </div>
+  </section>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <!-- Yellow background for seamless transition to drip.png -->
+  <!-- This div makes the area between the hero image and drip.png yellow -->
+  <div class="yellow-divider-bg">
+    <!-- Divider Image (drip.png) sits on top of the yellow background -->
+    <img src="drip.png" alt="Divider" class="divider-img">
+  </div>
+
+  <!-- Yellow Strip (main content) -->
+  <div class="yellow-strip">
+    <h3>Every donation is tracked and accounted for.</h3>
+    <div class="progress-info">
+      <span>$543.63 raised</span>
+      <span>$9,456.37 left</span>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+    <button class="donate-btn">Donate Now</button>
+  </div>
+
 </body>
 </html>
