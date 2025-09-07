@@ -102,8 +102,8 @@
       position: relative;
       background: url('charity water.jpg') no-repeat center top;
       background-size: cover;
-      background-position: center -150px;
-      min-height: 80vh; /* Increase height for small screens */
+      background-position: center center; /* Center image for all screens */
+      min-height: 80vh; /* Fill most of the screen height */
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
@@ -204,10 +204,11 @@
       width: 100%;
       margin: 0;
       padding: 0;
-      /* Add a little padding above and below the image for a smooth look */
-      padding-top: 0;
-      padding-bottom: 0;
+      /* Remove any padding so yellow touches hero and divider image */
       text-align: center; /* center the image */
+      /* Use min-height to ensure yellow strip is visible if image is short */
+      min-height: 1px;
+      /* For small screens, no extra space */
     }
 
     .divider-img {
@@ -288,8 +289,8 @@
       }
       .hero {
         min-height: 100vh;
-        padding: 0; /* No padding for large screens */
-        background-position: center -150px;
+        background-position: center center;
+        padding: 0;
       }
       .hero-content {
         max-width: 600px;
